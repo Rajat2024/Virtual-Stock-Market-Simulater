@@ -1,19 +1,8 @@
 import React, { useState, useContext } from "react";
-import {
-  Box,
-  Typography,
-  TextField,
-  CssBaseline,
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  Link,
-} from "@material-ui/core";
+import { Box, Typography, TextField, CssBaseline,  Button, Card, CardContent, Grid, Link,} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 import Axios from "axios";
-
 import styles from "./Auth.module.css";
 
 const Login = () => {
@@ -65,9 +54,7 @@ const Login = () => {
         <Box width="70vh" boxShadow={1}>
           <Card className={styles.paper}>
             <CardContent>
-              <Typography component="h1" variant="h5">
-                Login
-              </Typography>
+              <Typography component="h1" variant="h5"> Login </Typography>
               <form className={styles.form} onSubmit={onSubmit}>
                 <TextField
                   variant="outlined"
@@ -83,6 +70,7 @@ const Login = () => {
                   value={username}
                   onChange={onChangeUsername}
                 />
+
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -99,21 +87,14 @@ const Login = () => {
                   onChange={onChangePassword}
                 />
                 <Box display="flex" justifyContent="center">
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    className={styles.submit}
-                  >
+                  <Button type="submit" variant="contained" color="primary" className={styles.submit}>
                     Login
                   </Button>
                 </Box>
               </form>
               <Grid container justify="center">
                 <Grid item>
-                  <Link href="/register" variant="body2">
-                    Need an account?
-                  </Link>
+                  <Link href="/register" variant="body2"> Need an account? </Link>
                 </Grid>
               </Grid>
             </CardContent>

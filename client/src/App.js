@@ -28,17 +28,16 @@ function App() {
 
       const tokenIsValid = await Axios.post(url + "/auth/validate", null, { headers,});
 
+      // tokenIsValid is either true or false ?????????????????? then .data ????
+
       if (tokenIsValid.data) {
         const userRes = await Axios.get(url + "/auth/user", { headers });
-        setUserData({
-          token,
-          user: userRes.data,
-        });
+        // userRes is returning json data of id, username, and balance
+        setUserData({ token, user: userRes.data, });
       } else {
         setUserData({ token: undefined, user: undefined });
       }
-    };
-
+    }; 
     checkLoggedIn();
   }, []);
 
@@ -48,7 +47,7 @@ function App() {
 
         <div>
           <Switch>
-            {userData.user ?
+            { userData.user ?
               (<Route path="/" exact component={PageTemplate}/>) 
               : 
               (<Route path="/" exact component={Register} />)

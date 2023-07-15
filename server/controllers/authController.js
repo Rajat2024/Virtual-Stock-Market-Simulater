@@ -70,6 +70,7 @@ exports.validate = async (req, res) => {
       return res.json(false);
     }
     const verified = jwt.verify(token, process.env.JWT_SECRET);
+    
     if (!verified) {
       return res.json(false);
     }
