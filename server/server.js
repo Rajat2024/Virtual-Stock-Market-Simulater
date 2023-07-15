@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const path = require("path");
 const cors = require("cors");
+const { errorHandler, notFound } = require('./middleware/error.js');
 
 // SETUP
 app.use(cors()); // allows cross-origin requests
@@ -29,13 +30,18 @@ mongoose.connect(DB, {
   .catch((err) => console.log(err));
 // DATABASE CONNECTION DONE
 
-// ROUTES
-
+// All ROUTES
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/data", require("./routes/dataRoutes"));
 app.use("/api/news", require("./routes/newsRoutes"));
 app.use("/api/stock",  require("./routes/stockRoutes"));
 
+
+// Error Handling middlewares 
+app.use(notFound); // if no route is found then this middleware will run
+app.use(errorHandler); // if any error occurs in any route 
+
+// is for hosting a website
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 
