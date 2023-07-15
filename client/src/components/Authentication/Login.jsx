@@ -10,33 +10,39 @@ const Login = () => {
   const { setUserData } = useContext(UserContext);
 
   const [username, setUsername] = useState("");
-  const [usernameError, setUsernameError] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
 
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  
+  // To Handle the State of the Input Fields (Username and Password) 
   const onChangeUsername = (e) => {
     const newUsername = e.target.value;
     setUsername(newUsername);
   };
-
   const onChangePassword = (e) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
   };
 
+ // when we submit the form, we want to send the data to the server 
   const onSubmit = async (e) => {
     e.preventDefault();
     const newUser = { username, password };
     const url = "/api/auth/login";
+
     const loginRes = await Axios.post(url, newUser);
 
     if (loginRes.data.status === "fail") {
       setUsernameError(loginRes.data.message);
       setPasswordError(loginRes.data.message);
     } else {
-      setUserData(loginRes.data);
+      setUserData(loginRes.data); // from the usercontext
+      // set the token to local storage
       localStorage.setItem("auth-token", loginRes.data.token);
       history.push("/");
+      //you are instructing the router to navigate to the root URL of your application. This can be useful in scenarios where you want to redirect the user to a different page programmatically, such as after a successful form submission or a user action.
+      // it does not render "/" componet but if an "/" component's state is changed, it will re-render
     }
   };
 

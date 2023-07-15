@@ -1,15 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Typography,
-  TextField,
-  CssBaseline,
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  Link,
-} from "@material-ui/core";
+import { Box, Typography, TextField, CssBaseline,  Button, Card, CardContent ,Grid, Link,} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
 
@@ -23,17 +13,16 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
+  // To Handle the State of the Input Fields (Username and Password)
   const onChangeUsername = (e) => {
     const newUsername = e.target.value;
     setUsername(newUsername);
-
     if (newUsername.length < 4 || newUsername.length > 15) {
       setUsernameError("Username must be between 4 and 15 characters.");
     } else {
       setUsernameError("");
     }
   };
-
   const onChangePassword = (e) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
@@ -115,21 +104,14 @@ const Register = () => {
                   onChange={onChangePassword}
                 />
                 <Box display="flex" justifyContent="center">
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    className={styles.submit}
-                  >
+                  <Button type="submit" variant="contained" color="primary" className={styles.submit} >
                     Register
                   </Button>
                 </Box>
               </form>
               <Grid container justify="center">
                 <Grid item>
-                  <Link href="/login" variant="body2">
-                    Already have an account?
-                  </Link>
+                  <Link href="/login" variant="body2"> Already have an account? </Link>
                 </Grid>
               </Grid>
             </CardContent>
