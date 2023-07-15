@@ -1,4 +1,5 @@
 const express = require("express");
+const app = express(); 
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
@@ -7,10 +8,10 @@ const cors = require("cors");
 const { errorHandler, notFound } = require("./middleware/error.js");
 
 // SETUP
-app.use(cors()); // allows cross-origin requests
 dotenv.config({ path: "./server/config/.env" }); // loads environment variables from .env file
 
-const app = express(); // create express server
+
+app.use(cors()); // allows cross-origin requests
 const port = process.env.PORT || 5000;
 
 app.use(express.urlencoded({ extended: true })); // allows us to access req.body
