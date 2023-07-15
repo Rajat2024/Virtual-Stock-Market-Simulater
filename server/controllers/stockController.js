@@ -8,51 +8,35 @@ exports.purchaseStock = async (req, res) => {
     const { userId, ticker, quantity, price } = req.body;
 
     if (req.user !== userId) {
-      return res.status(200).json({
-        status: "fail",
-        message: "Credentials couldn't be validated.",
-      });
+      return res.status(200).json({ status: "fail",  message: "Credentials couldn't be validated.", });
     }
 
     const user = await User.findById(userId);
 
     if (!user) {
-      return res.status(200).json({
-        status: "fail",
-        message: "Credentials couldn't be validated.",
-      });
+      return res.status(200).json({ status: "fail", message: "Credentials couldn't be validated.", });
     }
 
     const totalPrice = quantity * price;
     if (user.balance < totalPrice) {
-      return res.status(200).json({
-        status: "fail",
-        message: `You don't have enough cash to purchase this stock.`,
-      });
+      return res.status(200).json({ status: "fail", message: `You don't have enough cash to purchase this stock.`, });
     }
 
     const purchase = new Stock({ userId, ticker, quantity, price });
     await purchase.save();
     const updatedUser = await User.findByIdAndUpdate(userId, {
-      balance:
-        Math.round((user.balance - totalPrice + Number.EPSILON) * 100) / 100,
+      balance: Math.round((user.balance - totalPrice + Number.EPSILON) * 100) / 100,
     });
 
-    return res.status(200).json({
-      status: "success",
-      stockId: purchase._id,
+    return res.status(200).json({ status: "success",  stockId: purchase._id,
       user: {
         username: updatedUser.username,
         id: updatedUser._id,
-        balance:
-          Math.round((user.balance - totalPrice + Number.EPSILON) * 100) / 100,
+        balance: Math.round((user.balance - totalPrice + Number.EPSILON) * 100) / 100,
       },
     });
   } catch (error) {
-    return res.status(200).json({
-      status: "fail",
-      message: "Something unexpected happened.",
-    });
+    return res.status(200).json({ status: "fail",  message: "Something unexpected happened.", });
   }
 };
 
@@ -61,35 +45,23 @@ exports.sellStock = async (req, res) => {
     const { userId, stockId, quantity, price } = req.body;
 
     if (req.user !== userId) {
-      return res.status(200).json({
-        status: "fail",
-        message: "Credentials couldn't be validated.",
-      });
+      return res.status(200).json({ status: "fail", message: "Credentials couldn't be validated.", });
     }
 
     const stock = await Stock.findById(stockId);
 
     if (!stock) {
-      return res.status(200).json({
-        status: "fail",
-        message: "Credentials couldn't be validated.",
-      });
+      return res.status(200).json({ status: "fail", message: "Credentials couldn't be validated.", });
     }
 
     const user = await User.findById(userId);
 
     if (!user) {
-      return res.status(200).json({
-        status: "fail",
-        message: "Credentials couldn't be validated.",
-      });
+      return res.status(200).json({ status: "fail",  message: "Credentials couldn't be validated.", });
     }
 
     if (quantity > stock.quantity) {
-      return res.status(200).json({
-        status: "fail",
-        message: "Invalid quantity.",
-      });
+      return res.status(200).json({ status: "fail", message: "Invalid quantity.",  });
     }
 
     if (quantity === stock.quantity) {
@@ -103,12 +75,10 @@ exports.sellStock = async (req, res) => {
     const saleProfit = quantity * price;
 
     const updatedUser = await User.findByIdAndUpdate(userId, {
-      balance:
-        Math.round((user.balance + saleProfit + Number.EPSILON) * 100) / 100,
+      balance: Math.round((user.balance + saleProfit + Number.EPSILON) * 100) / 100,
     });
 
-    return res.status(200).json({
-      status: "success",
+    return res.status(200).json({  status: "success",
       user: {
         username: updatedUser.username,
         id: updatedUser._id,
@@ -117,10 +87,7 @@ exports.sellStock = async (req, res) => {
       },
     });
   } catch (error) {
-    return res.status(200).json({
-      status: "fail",
-      message: "Something unexpected happened.",
-    });
+    return res.status(200).json({ status: "fail", message: "Something unexpected happened.", });
   }
 };
 
@@ -145,10 +112,7 @@ const getPricesData = async (stocks) => {
 exports.getStockForUser = async (req, res) => {
   try {
     if (req.user !== req.params.userId) {
-      return res.status(200).json({
-        status: "fail",
-        message: "Credentials couldn't be validated.",
-      });
+      return res.status(200).json({  status: "fail", message: "Credentials couldn't be validated.", });
     }
 
     const stocks = await Stock.find({ userId: req.params.userId });
@@ -182,25 +146,16 @@ exports.getStockForUser = async (req, res) => {
       };
     });
 
-    return res.status(200).json({
-      status: "success",
-      stocks: modifiedStocks,
-    });
+    return res.status(200).json({ status: "success", stocks: modifiedStocks, });
   } catch (error) {
-    return res.status(200).json({
-      status: "fail",
-      message: "Something unexpected happened.",
-    });
+    return res.status(200).json({ status: "fail",  message: "Something unexpected happened.", });
   }
 };
 
 exports.resetAccount = async (req, res) => {
   try {
     if (req.user !== req.params.userId) {
-      return res.status(200).json({
-        status: "fail",
-        message: "Credentials couldn't be validated.",
-      });
+      return res.status(200).json({ status: "fail", message: "Credentials couldn't be validated.", });
     }
 
     const stocks = await Stock.find({ userId: req.params.userId });
@@ -212,8 +167,7 @@ exports.resetAccount = async (req, res) => {
       balance: 100000,
     });
 
-    return res.status(200).json({
-      status: "success",
+    return res.status(200).json({ status: "success",
       user: {
         username: updatedUser.username,
         id: updatedUser._id,
@@ -221,9 +175,6 @@ exports.resetAccount = async (req, res) => {
       },
     });
   } catch (error) {
-    return res.status(200).json({
-      status: "fail",
-      message: "Something unexpected happened.",
-    });
+    return res.status(200).json({ status: "fail", message: "Something unexpected happened.", });
   }
 };

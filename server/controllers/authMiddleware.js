@@ -1,14 +1,12 @@
 const jwt = require("jsonwebtoken");
 
 const errorMessage = (res) => {
-  return res.status(401).json({
-    status: "fail",
-    message: "Authorization denied, user is not logged in.",
-  });
+  return res.status(401).json({ status: "fail",  message: "Authorization denied, user is not logged in.", });
 };
 
 const auth = async (req, res, next) => {
   try {
+    
     const token = req.header("x-auth-token");
     if (!token) {
       return errorMessage(res);

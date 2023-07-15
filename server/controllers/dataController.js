@@ -4,16 +4,10 @@ const data = require("../config/stocksData");
 exports.getStockMetaData = async (req, res) => {
   try {
     const url = `https://api.tiingo.com/tiingo/daily/${req.params.ticker}?token=${process.env.TIINGO_API_KEY}`;
-
     const response = await Axios.get(url);
-    return res.status(200).json({
-      status: "success",
-      data: response.data,
-    });
+    return res.status(200).json({ status: "success" , data:response.data,});
   } catch (error) {
-    return res.status(200).json({
-      status: "fail",
-    });
+    return res.status(200).json({ status: "fail",});
   }
 };
 
@@ -26,14 +20,9 @@ exports.getStockInfo = (req, res) => {
   });
 
   if (info) {
-    return res.status(200).json({
-      status: "success",
-      data: info,
-    });
+    return res.status(200).json({status: "success", data: info,});
   } else {
-    return res.status(200).json({
-      status: "fail",
-    });
+    return res.status(200).json({status: "fail",});
   }
 };
 
@@ -42,6 +31,7 @@ exports.getStockHistoricData = async (req, res) => {
   try {
     const startDate = new Date();
     startDate.setFullYear(startDate.getFullYear() - 2);
+
     const year = startDate.getFullYear();
     const month = startDate.getMonth();
     const day = startDate.getDate();
@@ -55,10 +45,7 @@ exports.getStockHistoricData = async (req, res) => {
     const pastMonth = [];
 
     for (let i = 0; i < 25; i++) {
-      pastMonth.push({
-        date: data[data.length - 1 - i].date,
-        adjClose: data[data.length - 1 - i].adjClose,
-      });
+      pastMonth.push({date: data[data.length - 1 - i].date , adjClose: data[data.length - 1 - i].adjClose,});
     }
 
     // Average of last 6 months:
@@ -77,8 +64,7 @@ exports.getStockHistoricData = async (req, res) => {
       }
 
       sixMonthAverages.push({
-        value:
-          Math.round((monthAverage / dataPoints + Number.EPSILON) * 100) / 100,
+        value: Math.round((monthAverage / dataPoints + Number.EPSILON) * 100) / 100,
         month: latestMonth,
       });
       latestMonth = new Date(data[index].date).getMonth();
@@ -98,8 +84,7 @@ exports.getStockHistoricData = async (req, res) => {
     pastTwoYears.reverse();
 
     // Return response
-    return res.status(200).json({
-      status: "success",
+    return res.status(200).json({ status: "success",
       pastDay: {
         date: data[data.length - 1].date,
         adjClose: data[data.length - 1].adjClose,
@@ -111,6 +96,7 @@ exports.getStockHistoricData = async (req, res) => {
       pastTwoYears,
       sixMonthAverages,
     });
+
   } catch (error) {
     return res.status(200).json({
       status: "fail",
@@ -153,15 +139,8 @@ exports.getRandomStockData = async (req, res) => {
 
     data.reverse();
 
-    return res.status(200).json({
-      status: "success",
-      ticker: stock.ticker,
-      name: stock.name,
-      data,
-    });
+    return res.status(200).json({  status: "success",  ticker: stock.ticker, name: stock.name, data,  });
   } catch (error) {
-    return res.status(200).json({
-      status: "fail",
-    });
+    return res.status(200).json({ status: "fail", });
   }
 };
