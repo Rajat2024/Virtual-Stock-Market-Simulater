@@ -8,7 +8,7 @@ const cors = require("cors");
 const { errorHandler, notFound } = require("./middleware/error.js");
 
 // SETUP
-dotenv.config({ path: "./server/config/.env" }); // loads environment variables from .env file
+dotenv.config({ path: "./config/.env" }); // loads environment variables from .env file
 
 
 app.use(cors()); // allows cross-origin requests
