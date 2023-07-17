@@ -4,11 +4,13 @@
     "description": "Stock Trading Simulator Web App",
     "main": "index.js",
     "scripts": {
-        "start": "node server/server.js",
-        "server": "nodemon server/server.js",
-        "build": "cd client && npm run build",
-        "install-client": "cd client && npm install"
-    },
+        "start": "node index.js",
+        "server": "nodemon index.js",
+        "frontend": "npm start --prefix frontend",
+        "frontendinstall": "npm install --prefix frontend",
+        "dev": "concurrently \"npm run server\" \"npm run frontend\"",
+        "render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+      },
     "author": "Rajat Singh",
     "dependencies": {
         "axios": "^0.20.0",
