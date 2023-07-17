@@ -2,7 +2,7 @@
     "name": "stock-trading-simulator",
     "version": "1.0.0",
     "description": "Stock Trading Simulator Web App",
-    "main": "server.js",
+    "main": "index.js",
     "scripts": {
         "start": "node server/server.js",
         "server": "nodemon server/server.js",

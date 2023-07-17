@@ -34,23 +34,25 @@ mongoose
   .catch((err) => console.log(err));
 
 // All ROUTES
-app.use("/api/auth", require("./routes/authRoutes"));
-app.use("/api/data", require("./routes/dataRoutes"));
-app.use("/api/news", require("./routes/newsRoutes"));
-app.use("/api/stock", require("./routes/stockRoutes"));
+app.use("/api/auth", require("./routes/authRoutes.js"));
+app.use("/api/data", require("./routes/dataRoutes.js"));
+app.use("/api/news", require("./routes/newsRoutes.js"));
+app.use("/api/stock", require("./routes/stockRoutes.js"));
 
 // Error Handling middlewares
 app.use(notFound); // if no route is found then this middleware will run
 app.use(errorHandler); // if any error occurs in any route
 
-// is for hosting a website
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
+// ----------------production -----------------
+if (process.env.NODE_ENV === 'production') 
+ {
+    //*Set static folder up in production
+    app.use(express.static('frontend/build'));
 
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname + "/../client/build/index.html"));
-//   });
-// }
+    app.get('*', (req,res) => res.sendFile(path.resolve(__dirname, 'frontend', 'build','index.html')));
+  }
+// ------------------production---------------
+
 
 // APP
 app.listen(port, () => {
