@@ -27,21 +27,25 @@ const Dashboard = ({ purchasedStocks }) => {
   return (
     <Container maxWidth="lg" className={styles.container}>
       <Grid container spacing={3}>
+
         <Grid item xs={12} md={8} lg={9}>
           <Paper className={fixedHeightPaper}>
             <Chart />
           </Paper>
         </Grid>
+
         <Grid item xs={12} md={4} lg={3}>
           <Paper className={fixedHeightPaper}>
             <Balance purchasedStocks={purchasedStocks} />
           </Paper>
         </Grid>
+
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <Purchases purchasedStocks={purchasedStocks} />
           </Paper>
         </Grid>
+        
       </Grid>
     </Container>
   );

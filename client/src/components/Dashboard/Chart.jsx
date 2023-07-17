@@ -15,6 +15,7 @@ const Chart = () => {
       }
     };
     getData();
+     // eslint-disable-next-line
   }, []);
 
   return (

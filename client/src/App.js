@@ -39,6 +39,7 @@ function App() {
       }
     }; 
     checkLoggedIn();
+    // eslint-disable-next-line
   }, []);
 
   return (

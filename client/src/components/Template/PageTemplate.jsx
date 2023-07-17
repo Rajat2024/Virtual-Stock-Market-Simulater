@@ -2,19 +2,13 @@ import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 import styles from "./PageTemplate.module.css";
+
 import clsx from "clsx";
-import {
-  Drawer,
-  CssBaseline,
-  AppBar,
-  Toolbar,
-  List,
-  Typography,
-  Divider,
-  IconButton,
-} from "@material-ui/core";
+import { Drawer, CssBaseline, AppBar, Toolbar, List, Typography,  Divider, IconButton,} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import { makeStyles } from "@material-ui/core/styles";
+
 import Navbar from "../Template/Navbar";
 import SecondNavbar from "../Template/SecondNavbar";
 import Dashboard from "../Dashboard/Dashboard";
@@ -22,7 +16,6 @@ import News from "../News/News";
 import Search from "../Search/Search";
 import SettingsModal from "./SettingsModal";
 import Axios from "axios";
-import { makeStyles } from "@material-ui/core/styles";
 
 const drawerWidth = 240;
 
@@ -78,19 +71,21 @@ const PageTemplate = () => {
 
   useEffect(() => {
     const getPurchasedStocks = async () => {
+      // Call API to get all purchased stocks
       const url = `/api/stock/${userData.user.id}`;
       const headers = {
         "x-auth-token": userData.token,
       };
-  
       const response = await Axios.get(url, {
         headers,
       });
+      // response will return json of {status: "success", stocks: [ ]}
       if (response.data.status === "success") {
         setPurchasedStocks(response.data.stocks);
       }
     };
     getPurchasedStocks();
+    // eslint-disable-next-line
   }, []);
 
   const logout = () => {
@@ -117,56 +112,23 @@ const PageTemplate = () => {
   return (
     <div className={styles.root}>
       <CssBaseline />
-        <AppBar
-          position="absolute"
-          style={{ background: '#2E3B55'}}
-          className={clsx(
-            styles.appBarBackground,
-            classes.appBar,
-            open && classes.appBarShift
-          )}
-          
-        >
+        <AppBar position="absolute" style={{ background: '#2E3B55'}} className={clsx( styles.appBarBackground, classes.appBar, open && classes.appBarShift )} >
           <Toolbar className={styles.toolbar}>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              className={clsx(
-                styles.menuButton,
-                open && styles.menuButtonHidden
-              )}
-            >
+            <IconButton edge="start" color="inherit" aria-label="open drawer" onClick={handleDrawerOpen} className={clsx( styles.menuButton, open && styles.menuButtonHidden  )} >
               <MenuIcon />
             </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              className={styles.title}
-            >
+            <Typography component="h1" variant="h6" color="inherit" noWrap className={styles.title} >
               {currentPage === "dashboard" && "Dashboard"}
               {currentPage === "news" && "Market News"}
               {currentPage === "search" && "Search"}
             </Typography>
-            <Typography color="inherit">
-              Hello,{" "}
-              {userData.user.username
-                ? userData.user.username.charAt(0).toUpperCase() +
-                  userData.user.username.slice(1)
-                : ""}
+            <Typography color="inherit"> Hello,{" "}
+              { userData.user.username ? userData.user.username.charAt(0).toUpperCase() + userData.user.username.slice(1):""}
             </Typography>
           </Toolbar>
         </AppBar>
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-          }}
-          open={open}
-        >
+
+        <Drawer variant="permanent" classes={{ paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),}} open={open}>
           <div className={styles.toolbarIcon}>
             <IconButton onClick={handleDrawerClose}>
               <ChevronLeftIcon />
@@ -181,6 +143,7 @@ const PageTemplate = () => {
             <SecondNavbar logout={logout} openSettings={openSettings} />
           </List>
         </Drawer>
+
       <main className={styles.content}>
         <div className={classes.appBarSpacer} />
         {currentPage === "dashboard" && (
@@ -188,10 +151,7 @@ const PageTemplate = () => {
         )}
         {currentPage === "news" && <News />}
         {currentPage === "search" && (
-          <Search
-            setPurchasedStocks={setPurchasedStocks}
-            purchasedStocks={purchasedStocks}
-          />
+          <Search setPurchasedStocks={setPurchasedStocks} purchasedStocks={purchasedStocks} />
         )}
         {settingsOpen && <SettingsModal setSettingsOpen={setSettingsOpen} />}
       </main>

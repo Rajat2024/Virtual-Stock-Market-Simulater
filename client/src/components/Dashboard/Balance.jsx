@@ -18,6 +18,7 @@ const Balance = ({ purchasedStocks }) => {
       return Math.round((total + Number.EPSILON) * 100) / 100;
     };
     setPortfolioBalance(portfolioBalance());
+     // eslint-disable-next-line
   }, [purchasedStocks]);
 
   return (

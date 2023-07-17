@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const errorMessage = (res, error) => {
   return res.status(400).json({ status: "fail", message: error.message });
 };
-
 // created registerUser api route
 exports.registerUser = async (req, res) => {
   try {
@@ -36,7 +35,6 @@ exports.registerUser = async (req, res) => {
     return errorMessage(res, error);
   }
 };
-
 // created loginUser api route
 exports.loginUser = async (req, res) => {
   try {

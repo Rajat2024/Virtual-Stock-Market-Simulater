@@ -85,6 +85,7 @@ const StockCard = ({ setPurchasedStocks, purchasedStocks, currentStock }) => {
     };
 
     getData();
+     // eslint-disable-next-line
   }, []);
 
   return (

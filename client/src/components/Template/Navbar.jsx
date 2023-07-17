@@ -24,21 +24,11 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
 
   return (
     <div>
-      <ListItem
-        button
-        selected={currentPage === "dashboard"}
-        onClick={onDashboardButtonClick}
-      >
-        <ListItemIcon>
-          <DashboardIcon />
-        </ListItemIcon>
+      <ListItem button selected={currentPage === "dashboard"} onClick={onDashboardButtonClick} >
+        <ListItemIcon>     <DashboardIcon />   </ListItemIcon>
         <ListItemText primary="Dashboard" />
       </ListItem>
-      <ListItem
-        button
-        selected={currentPage === "search"}
-        onClick={onSearchButtonClick}
-      >
+      <ListItem button selected={currentPage === "search"} onClick={onSearchButtonClick} >
         <ListItemIcon>
           <SearchIcon />
         </ListItemIcon>

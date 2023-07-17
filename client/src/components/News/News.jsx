@@ -105,6 +105,7 @@ const News = () => {
     };
 
     getCards();
+     // eslint-disable-next-line
   }, []);
 
   return (

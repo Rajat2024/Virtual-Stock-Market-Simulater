@@ -1,18 +1,7 @@
 import React, { useState, useContext } from "react";
 import UserContext from "../../context/UserContext";
 import styles from "../Template/PageTemplate.module.css";
-import {
-  Typography,
-  IconButton,
-  Box,
-  Button,
-  TextField,
-  Container,
-  Grid,
-  Card,
-  CardHeader,
-  CardContent,
-} from "@material-ui/core";
+import { Typography, IconButton, Box, Button, TextField, Container, Grid, Card, CardHeader, CardContent, } from "@material-ui/core";
 import { motion } from "framer-motion";
 import CloseIcon from "@material-ui/icons/Close";
 import Axios from "axios";
@@ -73,14 +62,7 @@ const SaleModalContent = ({ setSaleOpen, stock }) => {
   };
 
   return (
-    <Grid
-      container
-      spacing={0}
-      direction="column"
-      alignItems="center"
-      justify="center"
-      style={{ minHeight: "100vh" }}
-    >
+    <Grid container spacing={0} direction="column" alignItems="center" justify="center" style={{ minHeight: "100vh" }}>
       <Box width="60vh" boxShadow={1}>
         <Card>
           <CardHeader
@@ -94,55 +76,18 @@ const SaleModalContent = ({ setSaleOpen, stock }) => {
             <Typography component="h1" variant="h6" align="center">
               Sell
             </Typography>
+            
             <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                disabled
-                id="name"
-                label="Name"
-                name="Name"
-                autoComplete="Name"
-                value={stock.name}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                disabled
-                id="price"
-                label="Price"
-                name="price"
-                autoComplete="price"
-                value={stock.currentPrice}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="quantity"
-                label="Quantity"
-                name="quantity"
-                autoComplete="quantity"
-                value={quantity}
-                onChange={handleQuantityChange}
-              />
+              <TextField variant="outlined" margin="normal" fullWidth disabled id="name" label="Name" name="Name" autoComplete="Name" value={stock.name} />
+              <TextField variant="outlined" margin="normal" fullWidth disabled id="price"  label="Price" name="price" autoComplete="price" value={stock.currentPrice}/>
+              <TextField variant="outlined" margin="normal" required fullWidth id="quantity" label="Quantity" name="quantity" autoComplete="quantity"  value={quantity} onChange={handleQuantityChange} />
             </form>
             <br />
             <Box display="flex" justifyContent="center">
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                className={styles.confirm}
-                onClick={sellStock}
-              >
+              <Button type="submit"   variant="contained"   color="primary"  className={styles.confirm}   onClick={sellStock} >
                 Confirm
               </Button>
-            </Box>
-
+            </Box> 
             <br />
             <br />
           </CardContent>

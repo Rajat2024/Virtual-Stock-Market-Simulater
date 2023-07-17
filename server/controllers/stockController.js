@@ -96,13 +96,9 @@ const getPricesData = async (stocks) => {
     const promises = stocks.map(async (stock) => {
       const url = `https://api.tiingo.com/tiingo/daily/${stock.ticker}/prices?token=${process.env.TIINGO_API_KEY}`;
       const response = await Axios.get(url);
-      return {
-        ticker: stock.ticker,
-        date: response.data[0].date,
-        adjClose: response.data[0].adjClose,
-      };
+      // console.log(response); 
+      return { ticker: stock.ticker, date: response.data[0].date, adjClose: response.data[0].adjClose, };
     });
-
     return Promise.all(promises);
   } catch (error) {
     return [];
@@ -114,13 +110,13 @@ exports.getStockForUser = async (req, res) => {
     if (req.user !== req.params.userId) {
       return res.status(200).json({  status: "fail", message: "Credentials couldn't be validated.", });
     }
-
+    // console.log("ssokk");
     const stocks = await Stock.find({ userId: req.params.userId });
-    const stocksData = await getPricesData(stocks);
+    // console.log("Stokes",stocks);
+    const stocksData = await getPricesData(stocks); 
+    console.log("okk");
     const modifiedStocks = stocks.map((stock) => {
-      let name;
-      let currentPrice;
-      let currentDate;
+      let name,currentPrice,currentDate;
       data.stockData.forEach((stockData) => {
         if (stockData.ticker.toLowerCase() === stock.ticker.toLowerCase()) {
           name = stockData.name;
@@ -145,7 +141,7 @@ exports.getStockForUser = async (req, res) => {
         currentPrice,
       };
     });
-
+   console.log(modifiedStocks);
     return res.status(200).json({ status: "success", stocks: modifiedStocks, });
   } catch (error) {
     return res.status(200).json({ status: "fail",  message: "Something unexpected happened.", });

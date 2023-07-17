@@ -18,6 +18,7 @@ const Purchases = ({ purchasedStocks }) => {
   };
 
   const openSaleModal = (stock) => {
+    console.log(stock);
     setStock(stock);
     setStart(true);
   };
@@ -41,62 +42,33 @@ const Purchases = ({ purchasedStocks }) => {
           </TableHead>
           <TableBody>
             {purchasedStocks.map((row) => {
-              const difference =
-                (row.currentPrice - row.purchasePrice) / row.currentPrice;
-              const purchaseTotal =
-                Number(row.quantity) * Number(row.purchasePrice);
-              const currentTotal =
-                Number(row.quantity) * Number(row.currentPrice);
+              const difference = (row.currentPrice - row.purchasePrice) / row.currentPrice;
+              const purchaseTotal = Number(row.quantity) * Number(row.purchasePrice);
+              const currentTotal = Number(row.quantity) * Number(row.currentPrice);
               return (
                 <TableRow key={row.id}>
                   <TableCell>
-                    <Link onClick={() => openSaleModal(row)}>{row.ticker}</Link>
+                    <Link onClick= {() => openSaleModal(row)}> {row.ticker} </Link>
                   </TableCell>
-                  <TableCell>{row.name || "----"}</TableCell>
+                  <TableCell> {row.name || "----"} </TableCell>
                   <TableCell>{row.quantity || "----"}</TableCell>
-                  <TableCell align="right">
-                    ${row.purchasePrice.toLocaleString() || "----"}
-                  </TableCell>
-                  <TableCell align="right">
-                    ${roundNumber(purchaseTotal).toLocaleString() || "----"}
-                  </TableCell>
-                  <TableCell
-                    align="right"
-                    className={
-                      row.currentPrice >= row.purchasePrice
-                        ? styles.positive
-                        : styles.negative
-                    }
-                  >
+                  <TableCell align="right"> ${row.purchasePrice.toLocaleString() || "----"} </TableCell>
+                  <TableCell align="right"> ${roundNumber(purchaseTotal).toLocaleString() || "----"} </TableCell>
+                  <TableCell align="right" className={ row.currentPrice >= row.purchasePrice ? styles.positive : styles.negative } >
                     ${row.currentPrice.toLocaleString() || "----"}
                   </TableCell>
-                  <TableCell
-                    align="right"
-                    className={
-                      currentTotal >= purchaseTotal
-                        ? styles.positive
-                        : styles.negative
-                    }
-                  >
+                  <TableCell align="right" className={ currentTotal >= purchaseTotal ? styles.positive : styles.negative } >
                     ${roundNumber(currentTotal).toLocaleString() || "----"}
                   </TableCell>
-                  <TableCell
-                    align="right"
-                    className={
-                      difference >= 0 ? styles.positive : styles.negative
-                    }
-                  >
-                    {difference >= 0 ? "▲" : "▼"}{" "}
-                    {Math.abs(difference * 100).toFixed(2)}%
+                  <TableCell align="right" className={ difference >= 0 ? styles.positive : styles.negative } >
+                    {difference >= 0 ? "▲" : "▼"}{" "} {Math.abs(difference * 100).toFixed(2)}%
                   </TableCell>
                 </TableRow>
               );
             })}
           </TableBody>
         </Table>
-        {start && stock && (
-          <SaleModal setStart={setStart} stock={stock} />
-        )}
+        {start && stock && ( <SaleModal setStart={setStart} stock={stock} /> )}
       </div>
     </React.Fragment>
   );
