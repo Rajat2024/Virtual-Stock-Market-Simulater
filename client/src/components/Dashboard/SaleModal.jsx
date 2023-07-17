@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import CloseIcon from "@material-ui/icons/Close";
 import Axios from "axios";
 
-const SaleModal = ({ setSaleOpen, stock }) => {
+const SaleModal = ({ setStart, stock }) => {
   return (
     <motion.div
       className={styles.backdrop}
@@ -16,15 +16,15 @@ const SaleModal = ({ setSaleOpen, stock }) => {
     >
       <Container>
         <motion.div animate={{ opacity: 1, y: -20 }}>
-          <SaleModalContent setSaleOpen={setSaleOpen} stock={stock} />
+          <SaleModalContent setStart={setStart} stock={stock} />
         </motion.div>
       </Container>
     </motion.div>
   );
 };
 
-const SaleModalContent = ({ setSaleOpen, stock }) => {
-  const { info } = useContext(UserContext);
+const SaleModalContent = ({ setStart, stock }) => {
+  const { userData } = useContext(UserContext);
   const [quantity, setQuantity] = useState(1);
 
   const handleQuantityChange = (e) => {
@@ -34,29 +34,30 @@ const SaleModalContent = ({ setSaleOpen, stock }) => {
   };
 
   const handleClick = () => {
-    setSaleOpen(false);
+    setStart(false);
   };
 
   const sellStock = async (e) => {
     e.preventDefault();
 
     const headers = {
-      "x-auth-token": info.token,
+      "x-auth-token": userData.token,
     };
-
     const data = {
       stockId: stock.id,
       quantity: Number(quantity),
-      userId: info.user.id,
+      userId: userData.user.id,
       price: Number(stock.currentPrice),
     };
-
+    
+    console.log(data);
     const url = `/api/stock`;
     const response = await Axios.patch(url, data, {
       headers,
     });
-
+    console.log("ok"+response);
     if (response.data.status === "success") {
+      setStart(false);
       window.location.reload();
     }
   };
