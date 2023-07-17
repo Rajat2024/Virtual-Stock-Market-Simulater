@@ -12,7 +12,7 @@ dotenv.config({ path: "./config/.env" }); // loads environment variables from .e
 
 
 app.use(cors()); // allows cross-origin requests
-const port = process.env.PORT || 5000;
+const port = process.envPORT. || 5000;
 
 app.use(express.urlencoded({ extended: true })); // allows us to access req.body
 app.use(express.json()); // allows us to access req.body in JSON format
