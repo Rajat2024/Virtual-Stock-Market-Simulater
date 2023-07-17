@@ -9,11 +9,12 @@
         "build": "cd client && npm run build",
         "install-client": "cd client && npm install"
     },
-    "author": "Evan Sun, Eric Tong, Joe Lin, Kevin Li",
+    "author": "Rajat Singh",
     "dependencies": {
         "axios": "^0.20.0",
         "bcrypt": "^5.0.0",
         "bcryptjs": "^2.4.3",
+        "concurrently": "^7.6.0",
         "cookie-parser": "^1.4.5",
         "cors": "^2.8.5",
         "dotenv": "^8.2.0",
