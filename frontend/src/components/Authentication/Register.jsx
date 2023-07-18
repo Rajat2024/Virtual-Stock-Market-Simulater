@@ -40,8 +40,8 @@ const Register = () => {
       const newUser = { username, password };
       const url = "/api/auth/register";
       const registerRes = await Axios.post(url, newUser);
-
-      if (registerRes.data.status === "fail") {
+      
+      if (registerRes.length!='7' && registerRes.data.status === "fail") {
         if (!registerRes.data.type) {
           setPasswordError(registerRes.data.message);
           setUsernameError(registerRes.data.message);
