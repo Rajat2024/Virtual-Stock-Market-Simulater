@@ -1,6 +1,8 @@
 ## Introduction
+##### Problem Statement: Design and Develop a Web-Based Application to Facilitate Student Investment in the Share Market with a Credit System
+
+There has been a growing interest among students in schools and colleges to invest in the Share Market. However, a significant majority of these students, approximately 95%, end up facing losses due to their limited knowledge and experience in financial markets. To address this issue and encourage responsible investing,  Develop a web-based application that provides students with a simulated investment platform using credits.
   
-This web app is intended to provide a simulation of the real stock market. Every user is given an initial amount of 100,000 dollars, which they can use to purchase a variety of stocks. User can also search for a particular stock and view its information. For each stock, we provide a line chart of its price for the last three years so that user can do some analysis. We also provide the most recent market news for user to make better decisions.
    
 ## Tech Stack
  
