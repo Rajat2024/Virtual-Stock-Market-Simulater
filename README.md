@@ -42,7 +42,7 @@ Sample Request:
 ### End-of-Day Stock Price
 Sample Request: 
 ```
-const url = `https://api.tiingo.com/tiingo/daily/${req.params.ticker}?token=${process.env.TIINGO_API_KEY}`;
+const url=`https://api.tiingo.com/tiingo/daily/${req.params.ticker}?token=${process.env.TIINGO_API_KEY}`;
 const response = await Axios.get(url);
 console.log(response.json());
 ```
