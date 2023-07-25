@@ -68,5 +68,4 @@ PORT=5000
 ## Step 4. Run This Project from Root folder
 <b> CODE </b> -- ```  npm run dev  ```
 
-This app is also deployed on Heroku. <br>
-Go to [Live Link](https://virtual-stock-market-simulater.onrender.com/) to view it online.
+This app is also deployed on OnRender. <br>
