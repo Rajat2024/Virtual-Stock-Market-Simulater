@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Box, Typography, TextField, CssBaseline,  Button, Card, CardContent, Grid, Link,} from "@material-ui/core";
+import { Box, Typography, TextField, CssBaseline,  Button, Card, CardContent, Grid, Link,CircularProgress} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 import Axios from "axios";
@@ -8,7 +8,7 @@ import styles from "./Auth.module.css";
 const Login = () => {
   const history = useHistory();
   const { setUserData } = useContext(UserContext);
-
+  const [load, setLoad] = useState(false); // for loading spinner
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -27,16 +27,20 @@ const Login = () => {
 
  // when we submit the form, we want to send the data to the server 
   const onSubmit = async (e) => {
+
     e.preventDefault();
+    setLoad(true);
     const newUser = { username, password };
     const url = "/api/auth/login";
 
     const loginRes = await Axios.post(url, newUser);
 
     if (loginRes.data.status === "fail") {
+      setLoad(false);
       setUsernameError(loginRes.data.message);
       setPasswordError(loginRes.data.message);
     } else {
+
       setUserData(loginRes.data); // from the usercontext
       // set the token to local storage
       localStorage.setItem("auth-token", loginRes.data.token);
@@ -93,10 +97,11 @@ const Login = () => {
                   onChange={onChangePassword}
                 />
                 <Box display="flex" justifyContent="center">
-                  <Button type="submit" variant="contained" color="primary" className={styles.submit}>
+                  {!load ? (<Button type="submit" variant="contained" color="primary" className={styles.submit}>
                     Login
-                  </Button>
+                  </Button>) : (<CircularProgress />)}
                 </Box>
+
               </form>
               <Grid container justify="center">
                 <Grid item>

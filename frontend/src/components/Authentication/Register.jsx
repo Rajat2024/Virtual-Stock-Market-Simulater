@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Box, Typography, TextField, CssBaseline,  Button, Card, CardContent ,Grid, Link,} from "@material-ui/core";
+import { CircularProgress,Box, Typography, TextField, CssBaseline,  Button, Card, CardContent ,Grid, Link,} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
 
 import styles from "./Auth.module.css";
+import { set } from "mongoose";
 
 const Register = () => {
   const history = useHistory();
-
+  const [load, setLoad] = useState(false); // for loading spinner
   const [username, setUsername] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [password, setPassword] = useState("");
@@ -36,12 +37,15 @@ const Register = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setLoad(true);
     if (!usernameError && !passwordError) {
+
       const newUser = { username, password };
       const url = "/api/auth/register";
       const registerRes = await Axios.post(url, newUser);
       
-      if (registerRes.length!='7' && registerRes.data.status === "fail") {
+      if (registerRes.length!=='7' && registerRes.data.status === "fail") {
+        setLoad(false);
         if (!registerRes.data.type) {
           setPasswordError(registerRes.data.message);
           setUsernameError(registerRes.data.message);
@@ -54,6 +58,7 @@ const Register = () => {
         history.push("/login");
       }
     }
+    setLoad(false);
   };
 
   return (
@@ -104,9 +109,9 @@ const Register = () => {
                   onChange={onChangePassword}
                 />
                 <Box display="flex" justifyContent="center">
-                  <Button type="submit" variant="contained" color="primary" className={styles.submit} >
+                  {!load ? (<Button type="submit" variant="contained" color="primary" className={styles.submit} >
                     Register
-                  </Button>
+                  </Button>) : (<CircularProgress />)}
                 </Box>
               </form>
               <Grid container justify="center">
