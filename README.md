@@ -45,7 +45,14 @@ This web app is intended to provide a simulation of the real stock market. Every
 ### Buy Share
 | API Description | API EndPoints | Live on Postman |
 | -------- | -------- | -------- |
+| Share Details | /api/data/prices/:ticker/full| [Live](https://www.postman.com/warped-space-671976/workspace/share/request/22764198-83ca4efe-9dd1-4616-9b53-7ce7e3b9bc61?ctx=documentation) |
+| All Details | /api/stock | [Live](https://www.postman.com/warped-space-671976/workspace/share/request/22764198-ca745a88-69f9-44ab-b152-156274dfd56e?ctx=documentation)|
+| Buy Share | /api/data/prices/:ticker | [Live](https://www.postman.com/warped-space-671976/workspace/share/request/22764198-64e94112-a406-4e5a-ac2a-202ce77fda93?ctx=documentation) |
 
+### All news
+| API Description | API EndPoints | Live on Postman |
+| -------- | -------- | -------- |
+| all News | /api/news| [Live](https://www.postman.com/warped-space-671976/workspace/share/request/22764198-fe5da0ea-8369-47c1-8cdb-7eb594a59968?ctx=documentation) |
 ## REAL Time API Documentation 
 
 ### Market News
