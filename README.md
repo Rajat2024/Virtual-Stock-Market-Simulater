@@ -9,33 +9,53 @@ This web app is intended to provide a simulation of the real stock market. Every
    
 ## Tech Stack
  
-1. We used React.js as our frontend framework, and Express, Node as the backend framework. 
+1. We used Express, NodeJS as the backend framework. 
 2. We store user's information in Mongodb and the deploy the database on MongoDB Atlas. In addition to user's name and password, we also store user's balance as part of the schema.
-3. The 3rd party API that we used are https://finnhub.io/ and https://www.tiingo.com/, one for retreiving the latest market news and one for retrieving the stock price.
+3. The 3rd party API that we used are [finnhub.io](https://finnhub.io) and [tiingo.com](https://www.tiingo.com), one for retreiving the latest market news and one for retrieving the stock price.
 
 # File Structure
 ```
  Root
-   |-Frontend
-        |-Public
-        |-src
    |-middleware
    |-controller
    |-config
    |-models
    |-routes
    |-index.js
+   |-package.json
 ```
-## API Documentation
+## API EndPoints Documentation
+### Home Page
+
+| API Description | API EndPoints | Live on Postman |
+| -------- | -------- | -------- |
+| User Balance | /api/auth/user | [Live](https://www.postman.com/warped-space-671976/workspace/share/request/22764198-f9b1794c-ffef-4e1d-8e75-db872e287fb1?ctx=documentation) |
+| Validate | api/auth/validate | [Live](https://www.postman.com/warped-space-671976/workspace/share/request/22764198-e7a9797c-6680-4e17-86df-0ec212a2c6a0?ctx=documentation) |
+| All Shares| /api/stock/:userId | [Live](https://www.postman.com/warped-space-671976/workspace/share/request/22764198-73b16062-3f9c-46a3-bda4-d8d519e2efeb?ctx=documentation) |
+| Sell Share | /api/stock | [Live](https://www.postman.com/warped-space-671976/workspace/share/request/22764198-ac33fd6b-93f8-4cc3-84b0-eb572a932168?ctx=documentation) |
+| Random | /api/data/random | [Live](https://www.postman.com/warped-space-671976/workspace/share/request/22764198-a6c60127-a7a3-47cc-9ea4-0b2eec44c9e1?ctx=documentation) |
+
+### Auth
+| API Description | API EndPoints | Live on Postman |
+| -------- | -------- | -------- |
+| Login | /api/auth/login | [Live](https://www.postman.com/warped-space-671976/workspace/share/request/22764198-641756ef-da17-4dad-b9c6-0e6ff506acb1?ctx=documentation) |
+| Signup | /api/auth/register | [Live](https://www.postman.com/warped-space-671976/workspace/share/request/22764198-7ad5838b-933f-4f78-acf7-5a8d6a3db3d0?ctx=documentation) |
+| Reset Account | /api/stock/:userId | [Live](https://www.postman.com/warped-space-671976/workspace/share/request/22764198-214db4d6-f718-4fb7-a756-4e37a09abfcc?ctx=documentation) |
+
+### Buy Share
+| API Description | API EndPoints | Live on Postman |
+| -------- | -------- | -------- |
+
+## REAL Time API Documentation 
 
 ### Market News
 Sample Request: 
 
 ```
-    const token = process.env.STOCK_API_KEY;
-    const url = `https://finnhub.io/api/v1/news?category=general&token=${token}`;
-    const response = await Axios.get(url);
-    console.log(response.json());
+const token = process.env.STOCK_API_KEY;
+const url = `https://finnhub.io/api/v1/newscategory=general&token=${token}`;
+const response = await Axios.get(url);
+console.log(response.json());
 ```
 
 
@@ -59,13 +79,10 @@ STOCK_API_KEY = 'Get from https://finnhub.io/'
 PORT=5000
 ```
 
-##  Step 2. Install Dependencies in Frontend folder
-<b> CODE </b> -- ```  npm install  ```
-
 ## Step 3. Install Dependencies in Root folder
-<b> CODE </b> -- ```  npm install  ```
+CODE -- ```  npm install  ```
 
 ## Step 4. Run This Project from Root folder
-<b> CODE </b> -- ```  npm run dev  ```
+CODE -- ```  npm run dev  ```
 
 This app is also deployed on OnRender. <br>
