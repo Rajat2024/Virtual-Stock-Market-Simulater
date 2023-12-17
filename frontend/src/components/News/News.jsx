@@ -72,7 +72,7 @@ export default function App() {
         }
         const page = Math.floor(items.length / 20) + 1;
         console.log("page",page);
-        const url = `http://localhost:5000/api/news/${page}`;
+        const url = `/api/news/${page}`;
         try {
             const response = await Axios.get(url);
 
