@@ -70,7 +70,7 @@ export default function App() {
             setHasMore(false);
             return;
         }
-        const page = Math.floor(items.length / 20) + 1;
+        const page = Math.floor(items.length / 6) + 1;
         console.log("page",page);
         const url = `/api/news/${page}`;
         try {

@@ -6,7 +6,7 @@ exports.getNewsData = async (req, res) => {
 
     console.log("API is Called");
     const token = process.env.NEWS_API_KEY;
-    const url2 = `https://newsapi.org/v2/everything?q=business&sortBy=publishedAt&apiKey=${token}&language=en&pageSize=20&page=${req.params.page}`;
+    const url2 = `https://newsapi.org/v2/everything?q=business&sortBy=publishedAt&apiKey=${token}&language=en&pageSize=6&page=${req.params.page}`;
     const response2 = await Axios.get(url2);
     function extractFirst17Words(inputString) {
       const words = inputString.split(/\s+/); // Split the string by whitespace
