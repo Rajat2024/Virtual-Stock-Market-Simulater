@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import Axios from "axios";
 
 import styles from "./Auth.module.css";
-import { set } from "mongoose";
 
 const Register = () => {
   const history = useHistory();

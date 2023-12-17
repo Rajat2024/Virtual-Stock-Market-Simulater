@@ -21,7 +21,7 @@ app.use(cookieParser("secretcode")); // allows us to access req.cookies
 
 // DATABASE CONNECTION
 const DB = process.env.MONGO_URI;
-
+console.log("server is called");
 mongoose
   .connect(DB, {
     useNewUrlParser: true,

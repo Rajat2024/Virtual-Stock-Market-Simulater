@@ -10,7 +10,7 @@
         "frontendinstall": "npm install --prefix frontend",
         "dev": "concurrently \"npm run server\" \"npm run frontend\"",
         "render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
-      },
+    },
     "author": "Rajat Singh",
     "dependencies": {
         "axios": "^0.20.0",
