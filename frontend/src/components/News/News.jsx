@@ -99,9 +99,9 @@ export default function App() {
                 loader={<LoadingCards />}
                 height={1000}
                 endMessage={
-                    <p>
+                    <h2 style={{ textAlign: 'center' }}>
                         <b>Thats all for today, Please Come tomorrow to read more news</b>
-                    </p>
+                    </h2>
                 }
             >
                 <Grid container spacing={4}>
