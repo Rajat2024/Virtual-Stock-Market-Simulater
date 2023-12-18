@@ -39,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
 const LoadingCards = () => {
     return (
         <div>
-
             <br />
             <Grid container spacing={4}>
                 {Array.from(new Array(9)).map((item, index) => (
@@ -66,26 +65,26 @@ export default function App() {
     const [hasMore, setHasMore] = useState(true);
 
     const fetchMoreData = async () => {
-        if (items.length >= 10000) {
+        if (items.length >= 30) {
             setHasMore(false);
             return;
         }
         const page = Math.floor(items.length / 6) + 1;
-        console.log("page",page);
+
         const url = `/api/news/${page}`;
         try {
             const response = await Axios.get(url);
-
+            if(response.data.data.length==0){
+                setHasMore(false);
+                return;
+            }
             setItems(items.concat(response.data.data));
 
         } catch (error) {
+            setHasMore(false);
             console.error(error);
         }
     }
-    useEffect(()=>{
-        console.log("from use state",items);
-
-    },[items])
     useEffect(() => {
         fetchMoreData();
         // eslint-disable-next-line
@@ -101,7 +100,7 @@ export default function App() {
                 height={1000}
                 endMessage={
                     <p>
-                        <b>Yay! You have seen it all</b>
+                        <b>Thats all for today, Please Come tomorrow to read more news</b>
                     </p>
                 }
             >
