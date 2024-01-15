@@ -14,8 +14,8 @@ exports.registerUser = async (req, res) => {
       return res.status(200).json({ status: "fail", message: "Not all fields have been entered", });
     }
 
-    if (password.length < 6 || password.length > 25) {
-      return res.status(200).json({ status: "fail",message: "Password must be between 6-25 characters",type: "password",});
+    if (password.length < 6 || password.length > 40) {
+      return res.status(200).json({ status: "fail",message: "Password must be between 6-40 characters",type: "password",});
     }
 
     const existingUser = await User.findOne({ username }); // check if username already exists
@@ -55,6 +55,36 @@ exports.loginUser = async (req, res) => {
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET); // create jwt token
     return res.status(200).json({ token,user: {username,id: user._id, balance: user.balance,},});
+
+  } catch (error) {
+    return errorMessage(res, error);
+  }
+};
+
+exports.logingoogle = async (req, res) => {
+  console.log("logingoogle",);
+  try {
+    const { username, password } = req.body;
+    // console.log("logingoogle",username,password);
+    if (!username || !password) {
+      return res.status(200).json({status: "fail",message: "Not all fields have been entered.",});
+    }
+
+    const user = await User.findOne({ username });
+    if (user) {
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET); // create jwt token
+      return res.status(200).json({ token,user: {username,id: user._id, balance: user.balance,},});
+  }
+
+  // all correct till here
+  console.log("oh yes");
+  const newUser = new User({ username, password });
+  const savedUser = await newUser.save(); // it will return object id of saved user
+ 
+  
+    
+    const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET); // create jwt token
+    return res.status(200).json({ token,user: {username,id: savedUser._id, balance: 100000,},});
 
   } catch (error) {
     return errorMessage(res, error);

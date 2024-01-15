@@ -7,7 +7,7 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Username is required."],
       minlength: [4, "Username must be 4-15 characters."],
-      maxlength: [15, "Username must be 4-15 characters."],
+      maxlength: [40, "Username must be 4-15 characters."],
       lowercase: true,
     },
     password: {
