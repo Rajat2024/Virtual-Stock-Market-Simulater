@@ -58,7 +58,7 @@ const SaleModalContent = ({ setStart, stock }) => {
     console.log("ok"+response);
     if (response.data.status === "success") {
       setStart(false);
-      window.location.reload();
+      // window.location.reload();
     }
   };
 

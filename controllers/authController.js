@@ -62,17 +62,21 @@ exports.loginUser = async (req, res) => {
 };
 
 exports.logingoogle = async (req, res) => {
-  console.log("logingoogle",);
+  // console.log("logingoogle",);
   try {
     const { username, password } = req.body;
     // console.log("logingoogle",username,password);
+
     if (!username || !password) {
       return res.status(200).json({status: "fail",message: "Not all fields have been entered.",});
     }
 
     const user = await User.findOne({ username });
+
     if (user) {
+
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET); // create jwt token
+      
       return res.status(200).json({ token,user: {username,id: user._id, balance: user.balance,},});
   }
 

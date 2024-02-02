@@ -13,6 +13,7 @@ const auth = async (req, res, next) => {
     }
 
     const verified = jwt.verify(token, process.env.JWT_SECRET);
+    
     if (!verified) {
       return errorMessage(res);
     }

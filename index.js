@@ -17,7 +17,7 @@ const port = process.env.PORT || 5000;
 
 app.use(express.urlencoded({ extended: true })); // allows us to access req.body
 app.use(express.json()); // allows us to access req.body in JSON format
-app.use(cookieParser("secretcode")); // allows us to access req.cookies
+app.use(cookieParser("secretcode"));  // allows us to access req.cookies
 
 // DATABASE CONNECTION
 const DB = process.env.MONGO_URI;
@@ -34,6 +34,10 @@ mongoose
   })
   .catch((err) => console.log(err));
 
+  app.get('/', (req, res) => {
+    res.send('Hi,I am Backend and database is running');
+  });
+  
 // All ROUTES
 app.use("/api/auth", require("./routes/authRoutes.js"));
 app.use("/api/data", require("./routes/dataRoutes.js"));
@@ -45,13 +49,13 @@ app.use(notFound); // if no route is found then this middleware will run
 app.use(errorHandler); // if any error occurs in any route
 
 // ----------------production -----------------
-if (process.env.NODE_ENV === 'production') 
- {
-    //*Set static folder up in production
-    app.use(express.static('frontend/build'));
+// if (process.env.NODE_ENV === 'production') 
+//  {
+//     //*Set static folder up in production
+//     app.use(express.static('frontend/build'));
 
-    app.get('*', (req,res) => res.sendFile(path.resolve(__dirname, 'frontend', 'build','index.html')));
-  }
+//     app.get('*', (req,res) => res.sendFile(path.resolve(__dirname, 'frontend', 'build','index.html')));
+//   }
 // ------------------production---------------
 
 
