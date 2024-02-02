@@ -67,7 +67,7 @@ const SettingsModalContent = ({ setSettingsOpen }) => {
         token: userData.token,
         user: response.data.user,
       });
-      window.location.reload();
+      // window.location.reload();
     }
   };
 
